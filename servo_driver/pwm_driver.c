@@ -15,7 +15,7 @@ static dev_t my_device_nr;
 static struct class *my_class;
 static struct cdev my_device;
 
-#define DRIVER_NAME "my_servo_driver"
+#define DRIVER_NAME "my_pwm_driver"
 #define DRIVER_CLASS "MyModuleClass"
 
 /* Variables for pwm  */
@@ -38,9 +38,11 @@ static ssize_t driver_write(struct file *File, const char *user_buffer, size_t c
 	/* Set PWM on time */
 	if(value < 0 || value > 180)
 		printk("Invalid Value\n");
-	else
-		pwm_config(pwm0, 10000000 * (int)(1 + short / 180), 1000000000);
-
+	// value가 범위 안이라면 전달
+	else{
+		pwm_config(pwm0, 1000000 + 1000000 * value / 180, 20000000);
+		printk("%d\n", value);
+	}
 	/* Calculate data */
 	delta = to_copy - not_copied;
 
@@ -110,7 +112,7 @@ static int __init ModuleInit(void) {
 		goto AddError;
 	}
 
-	pwm_config(pwm0, pwm_on_time, 1000000000);
+	pwm_config(pwm0, 0, 20000000);
 	pwm_enable(pwm0);
 
 	return 0;
