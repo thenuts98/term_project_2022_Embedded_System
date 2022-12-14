@@ -74,7 +74,7 @@ int main(int argc, char **argv) {
 
     //------------------start-------------------------
     init_keyboard();
-    print_menu();
+    //print_menu();
 
     short buff;
     if(argc < 2)
@@ -91,7 +91,29 @@ int main(int argc, char **argv) {
     }
 
     close_keyboard();
-    write(dev_servo, 0x0000, 2);
+    close(dev_servo);
+    return 0;
+}
+
+int pwm(short degree)
+{
+    //------------------driver initialize---------------
+    //opening driver
+    int dev_servo = open("/dev/my_pwm_driver", O_RDWR);
+
+    if(dev_servo == -1) {
+        printf("Opening servo was not possible!\n");
+        return -1;
+    }
+
+    printf("device opening was successfull!\n");
+
+    //------------------start-------------------------
+
+    write(dev_servo, &degree, 2);
+    printf("%d\n", degree);
+
+
     close(dev_servo);
     return 0;
 }

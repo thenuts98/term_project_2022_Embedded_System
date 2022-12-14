@@ -20,7 +20,7 @@ static struct cdev my_device;
 
 /* Variables for pwm  */
 struct pwm_device *pwm0 = NULL;
-u32 pwm_on_time = 500000000;
+u32 pwm_on_time = 20000000;
 
 /**
  * @brief Write data to buffer
@@ -36,11 +36,11 @@ static ssize_t driver_write(struct file *File, const char *user_buffer, size_t c
 	not_copied = copy_from_user(&value, user_buffer, to_copy);
 
 	/* Set PWM on time */
-	if(value < 0 || value > 180)
+	if(value < 0 || value >= 175)
 		printk("Invalid Value\n");
 	// value가 범위 안이라면 전달
 	else{
-		pwm_config(pwm0, 1000000 + 1000000 * value / 180, 20000000);
+		pwm_config(pwm0, 1000000 + 1000000 * value / 90, 20000000);
 		printk("%d\n", value);
 	}
 	/* Calculate data */
