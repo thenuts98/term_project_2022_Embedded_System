@@ -1,6 +1,9 @@
-from flask import Flask     
+from flask import Flask, render_template
 from flask import request
-
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+from servo_driver import pwm
 app = Flask(__name__)       
 
 data = ''
@@ -8,14 +11,14 @@ data = ''
 @app.route('/')             
 
 def hello():                
-   return "Hello Flask!"    
+   return render_template('input.html')
 
 @app.route("/post",methods=['POST'])
 
 def post():
-	value = request.form['input']
-	msg = "%s 님 환영합니다." %value
-	return msg
+	value = int(request.form['input'])
+	pwm.pwm(value)
+	return render_template('input.html')
 
 
 

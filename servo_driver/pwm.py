@@ -1,7 +1,7 @@
 from ctypes import cdll
 import sys
 
-test = cdll.LoadLibrary('./test.dll')
+test = cdll.LoadLibrary('/home/pi/term_project_2022_Embedded_System/servo_driver/test.dll')
 
 def pwm(degree):
     test.pwm(degree)
