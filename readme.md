@@ -1,5 +1,10 @@
 # TERM PROJECT
 Embedded System Course Final Tem Project, DEC 2022
+
+### Installation
+```linux
+sudo bash install.sh
+```
 ## Servo Motor
 |file|description|
 |---|---|
@@ -8,13 +13,7 @@ Embedded System Course Final Tem Project, DEC 2022
 |`test.dll` | shared library file |
 |`test.py` | c function executable python file |
 
-### Installation
-```linux
-make clean
-make
-sudo insmod pwm_driver.ko
-sudo chmod 666 /dev/my_pwm_driver
-```
+
 ### Servo Control 
 ```linux
 python3 pwm.py {degree}
@@ -29,6 +28,22 @@ pwm.pwm(degree)
 |file|function| 
 |---|---|
 |`test.py`|flask test|
+|`input.html`|input page template|
+
+
+
+## Joystick
+|file|function| 
+|---|---|
+|`adc_driver.c` | ADC device driver | 
+|`adc.c`|c function file|
+|`adc.py` | c function executable python file |
+
+checking joystick resistance by ADC TCF8591T
+
+### Example
+`joystick_to_servo.py` syncs joystick movement to servo motor
+
 
 
 
