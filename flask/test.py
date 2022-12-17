@@ -16,9 +16,12 @@ def hello():
 @app.route("/post",methods=['POST'])
 
 def post():
-	value = int(request.form['input'])
-	pwm.pwm(value)
-	return render_template('input.html')
+	try:
+		value = int(request.form['input'])
+		pwm.pwm(value)
+	except Exception as e:
+		print(e)
+	return render_template('input.html', value = value)
 
 
 
