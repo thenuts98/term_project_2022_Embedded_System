@@ -3,7 +3,6 @@ import sys
 from servo_driver import pwm
 from joystick import adc
 
-test = cdll.LoadLibrary('/home/pi/term_project_2022_Embedded_System/servo_driver/test.dll')
 
 # 조이스틱으로 모터 제어
 
