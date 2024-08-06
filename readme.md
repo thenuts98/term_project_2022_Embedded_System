@@ -1,3 +1,6 @@
+---
+title: term_project_2022_Embedded_System
+---
 # TERM PROJECT
 Embedded System Course Final Tem Project, DEC 2022
 
